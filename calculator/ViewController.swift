@@ -17,6 +17,8 @@ class ViewController: UIViewController {
     var b_fuzhi:Bool=false
     var b_dot:Bool=false
     var result:Double=0.0
+    var flag=0
+    
     
     
     @IBOutlet weak var pm: UITextField!
@@ -78,8 +80,14 @@ class ViewController: UIViewController {
         ys("divide")
     }
     @IBAction func dot(sender: AnyObject) {
-        click(".")
-    }
+        if (b_dot == false){
+            pm.text=pm.text!+"."
+            b_dot=true
+        }
+        else{
+            pm.text=pm.text!+""
+        }
+           }
     
     func evaluation(){
         if (b_fuzhi==false)
@@ -142,8 +150,14 @@ class ViewController: UIViewController {
         b_dot=false
         pm.text="0.0"
     }
- /*   func minus(sender: AnyObject) {
-        var z:Double( pm.text! as NSString).doubleValue
+       func minus(sender: AnyObject) {
+        result=(Double)(pm.text!)!
+        result=(-result)
+        pm.text="\(result)"
+       /*x=(pm.text! as NSString).doubleValue
+        result=x *-1
+        pm.text="\(result)"*/
+     /* var z:Double( pm.text! as NSString).doubleValue
         if (z>0)
         {
             pm.text="-" + pm.text!
@@ -160,15 +174,26 @@ class ViewController: UIViewController {
             {
                 pm.text="\(z)"
             }
-        }
- 
         }*/
+ 
+        }
     func percent(sender: AnyObject) {
         x=(pm.text! as NSString).doubleValue
         result=x/100
         pm.text="\(result)"
     }
     
+    @IBAction func tuige(sender: AnyObject) {
+        var str = pm.text!
+        if (str != ""){
+        str.removeAtIndex(str.endIndex.predecessor())
+        pm.text=str
+        }
+        else{
+         pm.text="0"
+        }
+        
+    }
         
     override func viewDidLoad() {
         super.viewDidLoad()
